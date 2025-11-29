@@ -1,0 +1,5 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Material Design inspired terrain/elevation icon -->
+  <path d="M14 6L10.25 12L13.1 16.4L17 12L19.35 15.85C19.65 16.3 19.5 16.9 19.05 17.2C18.85 17.35 18.6 17.4 18.35 17.4H5.65C5.15 17.4 4.75 17 4.75 16.5C4.75 16.25 4.8 16 4.95 15.8L9 8.5L12 13L14 6Z" fill="currentColor"/>
+  <path d="M5 21H19C19.55 21 20 20.55 20 20S19.55 19 19 19H5C4.45 19 4 19.45 4 20S4.45 21 5 21Z" fill="currentColor"/>
+</svg>

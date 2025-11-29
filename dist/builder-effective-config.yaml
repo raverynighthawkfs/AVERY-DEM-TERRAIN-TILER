@@ -1,0 +1,27 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.avery.dem-terraindb-tiler
+productName: AVERY DEM Terraindb Tiler
+compression: normal
+files:
+  - filter:
+      - bin/**/*
+      - src/**/*
+      - ui/**/*
+      - assets/**/*
+      - electron-main.js
+      - electron-preload.js
+      - package.json
+mac:
+  target:
+    - target: dmg
+      arch:
+        - arm64
+  category: public.app-category.utilities
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+electronVersion: 33.4.11

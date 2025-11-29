@@ -1,0 +1,61 @@
+{
+  "name": "dem-terraindb-tiler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "electron-main.js",
+  "bin": {
+    "dem-terraindb-tiler": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node ./bin/cli.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ui": "electron ./electron-main.js",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "commander": "^14.0.2"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.avery.dem-terraindb-tiler",
+    "productName": "AVERY DEM Terraindb Tiler",
+    "compression": "normal",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "bin/**/*",
+      "src/**/*",
+      "ui/**/*",
+      "assets/**/*",
+      "electron-main.js",
+      "electron-preload.js",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["arm64"]
+        }
+      ],
+      "category": "public.app-category.utilities"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AVERY DEM Terraindb Tiler</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="app-title">AVERY DEM Terraindb Tiler</div>
+        <div class="app-subtitle">
+          Choose an input DEM (e.g. GeoTIFF) and an output directory. Tile size and max level
+          can be adjusted as needed.
+        </div>
+      </header>
+
+      <section class="quick-start">
+        <h2>Quick start &amp; supported files</h2>
+        <ol>
+          <li>Select a GeoTIFF DEM file (<code>.tif</code>, <code>.tiff</code>) as the input.</li>
+          <li>Choose an output directory (an empty folder is recommended).</li>
+          <li>
+            Adjust tile size and Z_LEVEL (max level of detail) if needed, then click
+            <strong>Generate Tiles</strong>.
+          </li>
+        </ol>
+        <p class="quick-start-note">
+          Currently, only GeoTIFF-based DEMs are supported. Other DEM formats should be converted
+          to GeoTIFF before loading. This build is a prototype: the generator logs configuration
+          and does not yet write real terrain tiles.
+        </p>
+      </section>
+
+      <section>
+        <div class="field-group">
+          <span class="field-label">📄 Input DEM</span>
+          <div class="field-row">
+            <input id="inputPath" type="text" placeholder="/path/to/input.tif" />
+            <button id="browseInput" class="secondary">📁 Browse…</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <span class="field-label">📁 Output directory</span>
+          <div class="field-row">
+            <input id="outputDir" type="text" placeholder="/path/to/output" />
+            <button id="browseOutput" class="secondary">🗂️ Browse…</button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <span class="field-label">🔧 Tile size</span>
+          <input id="tileSize" type="number" min="1" value="256" />
+        </div>
+
+        <div class="field-group">
+          <span class="field-label">📐 Z_LEVEL (max level of detail)</span>
+          <input id="maxLevel" type="number" min="0" value="10" />
+        </div>
+
+        <div class="actions">
+          <button id="runBtn">🚀 Generate Tiles</button>
+        </div>
+
+        <div id="status"></div>
+
+        <footer class="dem-readme">
+          <h2>DEM format notes</h2>
+          <p>
+            The DEM selector is currently optimized for GeoTIFF files:
+          </p>
+          <ul>
+            <li><code>.tif</code>, <code>.tiff</code> (GeoTIFF DEMs)</li>
+          </ul>
+          <p>
+            Other DEM formats are not yet supported in the file picker; convert them to GeoTIFF
+            before loading.
+          </p>
+        </footer>
+      </section>
+    </div>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>
