@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const { generateTerrainTiles } = require('./src/pipeline');
+const { readDEMMetadata, formatMetadata } = require('./src/dem-reader');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -53,6 +54,19 @@ ipcMain.handle('select-output-dir', async () => {
 
   if (result.canceled || !result.filePaths.length) return null;
   return result.filePaths[0];
+});
+
+ipcMain.handle('read-metadata', async (event, inputPath) => {
+  try {
+    if (!inputPath) {
+      throw new Error('Input DEM path is required');
+    }
+
+    const metadata = await readDEMMetadata(inputPath);
+    return { ok: true, metadata, formatted: formatMetadata(metadata) };
+  } catch (err) {
+    return { ok: false, error: err && err.message ? err.message : String(err) };
+  }
 });
 
 ipcMain.handle('run-tiler', async (event, options) => {

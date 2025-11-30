@@ -1,6 +1,7 @@
 const os = require('os');
 const { Command } = require('commander');
 const { generateTerrainTiles } = require('./pipeline');
+const { readDEMMetadata, formatMetadata } = require('./dem-reader');
 
 async function run(argv) {
   const program = new Command();
@@ -9,7 +10,8 @@ async function run(argv) {
     .name('dem-terraindb-tiler')
     .description('Merge elevation data from a DEM and generate terraindb tiles for Cesium / Unreal Engine.')
     .requiredOption('-i, --input <path>', 'Input DEM file (e.g. GeoTIFF)')
-    .requiredOption('-o, --output <dir>', 'Output directory for generated terraindb tiles')
+    .option('-o, --output <dir>', 'Output directory for generated terraindb tiles')
+    .option('--metadata', 'Display DEM metadata without generating tiles')
     .option('--tile-size <size>', 'Tile size in pixels or meters (implementation-specific)', '256')
     .option('--max-level <n>', 'Maximum level of detail', (v) => parseInt(v, 10), 10)
     .option(
@@ -27,6 +29,23 @@ async function run(argv) {
     .parse(argv);
 
   const options = program.opts();
+
+  // If --metadata flag is set, just display metadata and exit
+  if (options.metadata) {
+    try {
+      const metadata = await readDEMMetadata(options.input);
+      console.log(formatMetadata(metadata));
+      return;
+    } catch (err) {
+      console.error('Error reading DEM metadata:', err.message);
+      throw err;
+    }
+  }
+
+  // Otherwise, validate output directory is provided and generate tiles
+  if (!options.output) {
+    throw new Error('Output directory (-o, --output) is required when generating tiles');
+  }
 
   await generateTerrainTiles({
     inputPath: options.input,

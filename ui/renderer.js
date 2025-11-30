@@ -5,6 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const maxLevelEl = document.getElementById('maxLevel');
   const browseInputBtn = document.getElementById('browseInput');
   const browseOutputBtn = document.getElementById('browseOutput');
+  const viewMetadataBtn = document.getElementById('viewMetadata');
   const runBtn = document.getElementById('runBtn');
   const statusEl = document.getElementById('status');
 
@@ -24,6 +25,25 @@ window.addEventListener('DOMContentLoaded', () => {
     const selected = await window.demTiler.selectOutputDir();
     if (selected) {
       outputDirEl.value = selected;
+    }
+  });
+
+  viewMetadataBtn.addEventListener('click', async () => {
+    const inputPath = inputPathEl.value.trim();
+
+    if (!inputPath) {
+      setStatus('Please select an input DEM file first.', true);
+      return;
+    }
+
+    setStatus('Reading metadata...');
+
+    const result = await window.demTiler.readMetadata(inputPath);
+
+    if (result && result.ok) {
+      setStatus(result.formatted);
+    } else {
+      setStatus(`Error reading metadata: ${(result && result.error) || 'Unknown error'}`, true);
     }
   });
 
