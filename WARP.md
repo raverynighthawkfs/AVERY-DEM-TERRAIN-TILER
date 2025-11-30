@@ -1,3 +1,6 @@
+# CREATED BY THE ONE AND ONLY "RICHARD AIZEN AVERY" aka raverynighthawk or ravery@nighthawkfs.com
+# THIS APP IS SO MY DAMIES AND I CAN WRECK TERRAIN DATA AT BLISTERING SPEEDS USING NODEJS
+# CREDIT DUE WHERE CREDIT DUE: THANKS TO "STEVE JEPPSON AKA THE BEAV" AND "CRAZY JEFF LIVINGSTON" FOR THE SUPPORT
 # WARP.md
 
 This file provides guidance to WARP (warp.dev) when working with code in this repository.
